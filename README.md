@@ -1,8 +1,3 @@
-Below is the `README.md` content formatted as a proper Markdown file for your GitHub repository. You can copy this directly into a `README.md` file in your project directory.
-
----
-
-```markdown
 # Medicine Chatbot
 
 A Flask-based web chatbot that provides detailed information about medicines using a local dataset and the OpenFDA API. The chatbot uses TF-IDF similarity matching to interpret user queries and responds with structured information about medicine uses, side effects, storage, and more.
@@ -113,26 +108,6 @@ This project is ideal for learning about web development with Flask, natural lan
    - Click "Send" or press Enter.
    - The bot responds with structured info (e.g., uses, FDA data).
 
-3. **Example Queries**:
-   - "What is Augmentin used for?"
-     ```
-     **Uses:** Treatment of Bacterial infections
-     **FDA Indications:** AUGMENTIN is a combination penicillin-class...
-     **FDA Adverse Reactions:** Diarrhea, nausea, vomiting...
-     ```
-   - "Side effects of Azithral?"
-     ```
-     **Side Effects:** Nausea Abdominal pain Diarrhea
-     **FDA Indications:** Azithromycin is a macrolide antibacterial...
-     **FDA Adverse Reactions:** Diarrhea, nausea, abdominal pain...
-     ```
-   - "How to store Avastin?"
-     ```
-     **Storage:** refrigerated at 5°C, 50% humidity
-     **FDA Indications:** Not available
-     **FDA Adverse Reactions:** Not available
-     ```
-
 ## File Structure
 
 ```
@@ -143,81 +118,27 @@ medicine-chatbot/
 └── requirements.txt          # List of Python dependencies
 ```
 
-- **`chatbot.py`**: Contains Flask app, TF-IDF logic, API integration, and HTML/JavaScript for the UI.
-- **`Medicine_Details_Final.csv`**: CSV file with medicine data (must be provided or created).
-- **`requirements.txt`**: For easy dependency installation:
-  ```
-  pandas
-  scikit-learn
-  flask
-  requests
-  ```
-
 ## How It Works
 
 ### Backend
-1. **CSV Loading**:
-   - `pandas.read_csv()` loads `Medicine_Details_Final.csv` into a DataFrame.
-   - Columns are combined into a single text field (`combined`) for TF-IDF.
-
-2. **TF-IDF Matching**:
-   - `TfidfVectorizer` creates a matrix of term frequencies from the dataset.
-   - User input is transformed into a vector and compared to the matrix using `cosine_similarity`.
-   - The highest similarity score identifies the best-matching medicine.
-
-3. **API Integration**:
-   - `get_openfda_details()` queries the OpenFDA API with the medicine name.
-   - Returns FDA indications and adverse reactions or an error message.
-
-4. **Response Generation**:
-   - `get_response()` combines local data (`get_medicine_info()`) and API data into a structured string.
-   - Uses a similarity threshold (0.2) to ensure relevance.
-
-5. **Flask Server**:
-   - `/` route serves the HTML page.
-   - `/chat` route handles POST requests, processes input, and returns JSON.
+- **CSV Loading**: `pandas.read_csv()` loads `Medicine_Details_Final.csv` into a DataFrame.
+- **TF-IDF Matching**: `TfidfVectorizer` creates a matrix of term frequencies from the dataset.
+- **API Integration**: Queries OpenFDA API with medicine names.
+- **Response Generation**: Combines local data and API results into structured responses.
 
 ### Frontend
-1. **HTML/CSS**:
-   - A chat container with a header, scrollable chat box, and input area.
-   - Styled with a simple, classic look (gray bot messages, blue user messages).
-
-2. **JavaScript**:
-   - `sendMessage()`:
-     - Captures user input.
-     - Adds it to the chat box.
-     - Sends a POST request to `/chat`.
-     - Displays the bot’s response with formatting (line breaks, bold text).
-
-## Dataset
-
-The chatbot relies on `Medicine_Details_Final.csv`. Example format:
-
-| Medicine Name          | Composition                    | Uses                        | Side_effects                  | Manufacturer                  | Storage Condition | Storage Temperature (°C) | Storage Humidity (%) |
-|-----------------------|--------------------------------|-----------------------------|------------------------------|------------------------------|-------------------|--------------------------|---------------------|
-| Augmentin 625 Duo     | Amoxycillin (500mg) + Clav... | Treatment of Bacterial inf...| Vomiting Nausea Diarrhea...  | Glaxo SmithKline Pharmace... | dry               | 20                       | 40                  |
-| Azithral 500          | Azithromycin (500mg)          | Treatment of Bacterial inf...| Nausea Abdominal pain Dia... | Alembic Pharmaceuticals L... | cool              | 25                       | 50                  |
-
-- **Source**: Create your own or use a sample from the repo.
-- **Requirements**: Must match the column names exactly as above.
+- **HTML/CSS**: Chat UI with a chat box, input field, and button.
+- **JavaScript**: Handles sending user input and displaying bot responses.
 
 ## Troubleshooting
 
-- **"Send" Button Doesn’t Work**:
-  - **Check Console**: Open browser Inspect > Console for JavaScript errors (e.g., "fetch error").
-  - **Check Terminal**: Ensure Flask logs POST requests (`Received input:`).
-  - **Fix**: Verify `.user-input { flex-grow: 1; }` in CSS.
+- **Server Not Starting**:
+  - Run `pip install -r requirements.txt`.
+  - Change `app.run(port=5001)` if port 5000 is in use.
 
 - **No Response**:
-  - **API Failure**: OpenFDA might be down; check `get_openfda_details()` output.
-  - **CSV Issue**: Ensure `Medicine_Details_Final.csv` exists and has correct columns.
-
-- **Server Not Starting**:
-  - **Dependencies**: Run `pip install -r requirements.txt`.
-  - **Port Conflict**: Change `app.run(port=5001)` if 5000 is in use.
-
-- **Debugging**:
-  - Add `console.log` in `sendMessage()` or `print` in Python to trace execution.
+  - Check API connectivity.
+  - Ensure dataset is correctly formatted.
 
 ## Contributing
 
@@ -227,41 +148,7 @@ The chatbot relies on `Medicine_Details_Final.csv`. Example format:
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Open a Pull Request.
 
-Suggestions:
-- Add intent detection with NLP (e.g., spaCy, NLTK).
-- Improve UI with modern styling (e.g., Bootstrap).
-- Cache API responses for performance.
-
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-```
 
----
-
-### Instructions
-1. **Create the File**:
-   - Open a text editor (e.g., VS Code).
-   - Copy the above content.
-   - Save it as `README.md` in your project root (`C:\Users\Anil Abhange\Downloads\Chatbot\`).
-
-2. **Push to GitHub**:
-   - Initialize a Git repo if not already done:
-     ```bash
-     git init
-     git add README.md chatbot.py Medicine_Details_Final.csv
-     git commit -m "Initial commit with README and chatbot"
-     git remote add origin https://github.com/yourusername/medicine-chatbot.git
-     git push -u origin main
-     ```
-   - Replace `yourusername` with your GitHub username.
-
-3. **Optional Additions**:
-   - Add a `requirements.txt` file with:
-     ```
-     pandas
-     scikit-learn
-     flask
-     requests
-     ```
-   - Include `Medicine_Details_Final.csv` or a sample in the repo.
