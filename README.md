@@ -17,7 +17,7 @@ A Flask-based web chatbot that provides detailed information about medicines usi
 
 ## Overview
 
-The Medicine Chatbot is a web application designed to assist users in retrieving information about medicines. Users can ask questions like "What is Augmentin used for?" or "Side effects of Azithral?" via a simple chat interface. The bot processes these queries using TF-IDF vectorization to match them against a local CSV dataset (`Medicine_Details_Final.csv`) and fetches additional data from the OpenFDA API when available. Responses are structured with bold headings and bullet points for clarity, mimicking the style of advanced AI assistants like ChatGPT or Grok.
+The Medicine Chatbot is a web application designed to assist users in retrieving information about medicines. Users can ask questions like "What is Augmentin used for?" or "Side effects of Azithral?" via a simple chat interface. The bot processes these queries using TF-IDF vectorization to match them against a local CSV dataset (`Medicine_Details_Final.csv`) and fetches additional data from the OpenFDA API when available. Responses are structured with bold headings and bullet points for clarity, mimicking the style of advanced AI assistants like ChatGPT.
 
 This project is ideal for learning about web development with Flask, natural language processing with TF-IDF, and API integration.
 
